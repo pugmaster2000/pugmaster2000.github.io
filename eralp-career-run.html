@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#10131F">
 <title>Eralp Atmaca — Career Run</title>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Eralp Atmaca — Career Run">
@@ -18,43 +20,38 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --void:#10131F;
-  --deep:#1B2135;
-  --mid:#2E3A5C;
-  --sky:#3E5C8A;
-  --signal:#5BE0C8;
-  --warn:#E8B84B;
-  --paper:#EDF1F7;
-  --dim:#8A94B0;
+  --void:#10131F; --deep:#1B2135; --mid:#2E3A5C; --sky:#3E5C8A;
+  --signal:#5BE0C8; --warn:#E8B84B; --paper:#EDF1F7; --dim:#8A94B0;
   --px:"Press Start 2P",monospace;
   --mono:"JetBrains Mono",monospace;
   --ui:"Space Grotesk",system-ui,sans-serif;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{overscroll-behavior:none}
 body{
-  margin:0;background:var(--void);color:var(--paper);
-  font-family:var(--ui);overflow-x:hidden;
+  margin:0;background:var(--void);color:var(--paper);font-family:var(--ui);
+  padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);
 }
-.shell{max-width:1000px;margin:0 auto;padding:22px 16px 60px}
+body.playing{overflow:hidden;position:fixed;width:100%}
+.shell{max-width:1000px;margin:0 auto;padding:18px 14px 40px}
 
-/* header */
-.hud-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px 20px;margin-bottom:16px}
-.hud-top h1{font-family:var(--px);font-size:15px;line-height:1.5;margin:0;color:var(--paper)}
-.hud-top .role{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.hud-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-bottom:14px}
+.hud-top h1{font-family:var(--px);font-size:14px;line-height:1.5;margin:0}
+.hud-top .role{font-family:var(--mono);font-size:11px;color:var(--dim);margin:4px 0 0}
 .modeswap{
   margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
   background:transparent;border:1px solid var(--mid);color:var(--dim);
-  padding:8px 13px;cursor:pointer;border-radius:2px;text-transform:uppercase;
+  padding:11px 15px;cursor:pointer;border-radius:2px;text-transform:uppercase;
+  min-height:44px;
 }
 .modeswap:hover{border-color:var(--signal);color:var(--signal)}
 .modeswap:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 
-/* stage */
 .stage{position:relative;border:2px solid var(--mid);background:var(--deep);border-radius:3px;overflow:hidden}
-canvas{display:block;width:100%;height:auto;image-rendering:pixelated}
+canvas{display:block;width:100%;height:auto;touch-action:none}
 .hud{
   position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;
-  padding:10px 12px;font-family:var(--px);font-size:9px;color:var(--signal);
+  padding:9px 11px;font-family:var(--px);font-size:8px;color:var(--signal);
   pointer-events:none;text-shadow:0 2px 0 rgba(0,0,0,.6);
 }
 .hud .found{color:var(--warn)}
@@ -62,66 +59,63 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated}
 .startcard{
   position:absolute;inset:0;background:rgba(16,19,31,.94);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:16px;text-align:center;padding:24px;
+  gap:14px;text-align:center;padding:20px;
 }
-.startcard h2{font-family:var(--px);font-size:13px;line-height:1.8;margin:0;color:var(--warn)}
-.startcard p{font-family:var(--mono);font-size:12px;color:var(--dim);margin:0;max-width:44ch;line-height:1.7}
+.startcard h2{font-family:var(--px);font-size:12px;line-height:1.8;margin:0;color:var(--warn)}
+.startcard p{font-family:var(--mono);font-size:12px;color:var(--dim);margin:0;max-width:42ch;line-height:1.65}
 .startcard button{
   font-family:var(--px);font-size:11px;background:var(--signal);color:var(--void);
-  border:none;padding:14px 22px;cursor:pointer;border-radius:2px;
+  border:none;padding:16px 24px;cursor:pointer;border-radius:2px;min-height:48px;
 }
-.startcard button:hover{background:var(--warn)}
-.startcard button:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
+.startcard button:active{background:var(--warn)}
 
-/* dialog */
+/* panel: overlay on desktop, block below stage on mobile */
 .panel{
-  position:absolute;left:50%;bottom:14px;transform:translateX(-50%);
-  width:min(620px,calc(100% - 24px));background:var(--void);
-  border:2px solid var(--signal);border-radius:3px;padding:18px 20px;
-  display:none;
+  position:absolute;left:50%;bottom:12px;transform:translateX(-50%);
+  width:min(620px,calc(100% - 22px));background:var(--void);
+  border:2px solid var(--signal);border-radius:3px;padding:16px 18px;display:none;
 }
 .panel.on{display:block}
-.panel .tag{font-family:var(--px);font-size:8px;color:var(--warn);margin:0 0 10px;letter-spacing:.05em}
-.panel h3{font-family:var(--px);font-size:11px;line-height:1.7;margin:0 0 4px;color:var(--paper)}
-.panel .meta{font-family:var(--mono);font-size:11px;color:var(--dim);margin:0 0 12px}
-.panel ul{margin:0;padding-left:16px;font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--paper)}
-.panel li{margin-bottom:3px}
+.panel .tag{font-family:var(--px);font-size:8px;color:var(--warn);margin:0 0 9px}
+.panel h3{font-family:var(--px);font-size:10px;line-height:1.7;margin:0 0 4px;color:var(--paper)}
+.panel .meta{font-family:var(--mono);font-size:11px;color:var(--dim);margin:0 0 10px}
+.panel ul{margin:0;padding-left:16px;font-family:var(--mono);font-size:12.5px;line-height:1.7}
 .panel .close{
-  position:absolute;top:10px;right:12px;background:none;border:none;color:var(--dim);
-  font-family:var(--px);font-size:9px;cursor:pointer;
+  position:absolute;top:6px;right:8px;background:none;border:none;color:var(--dim);
+  font-family:var(--px);font-size:9px;cursor:pointer;padding:10px;min-width:40px;min-height:40px;
 }
-.panel .close:hover{color:var(--signal)}
 
-/* touch pad */
-.pad{display:none;gap:10px;margin-top:14px;justify-content:center}
+.pad{display:none;gap:10px;margin-top:12px;justify-content:center;touch-action:none}
 .pad button{
-  font-family:var(--px);font-size:12px;background:var(--deep);color:var(--paper);
-  border:2px solid var(--mid);border-radius:3px;padding:16px 0;flex:1;max-width:110px;
-  touch-action:manipulation;user-select:none;cursor:pointer;
+  font-family:var(--px);font-size:15px;background:var(--deep);color:var(--paper);
+  border:2px solid var(--mid);border-radius:6px;padding:0;flex:1;max-width:130px;
+  height:66px;touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer;
 }
-.pad button:active{background:var(--mid);border-color:var(--signal)}
-.keys{margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--dim);text-align:center}
+.pad button.hit{background:var(--mid);border-color:var(--signal);color:var(--signal)}
+.keys{margin-top:12px;font-family:var(--mono);font-size:11px;color:var(--dim);text-align:center}
 
-/* text mode */
-.textmode{display:none;padding-top:8px}
+.textmode{display:none}
 .textmode.on{display:block}
 .stagewrap.off{display:none}
-.textmode h2{font-family:var(--px);font-size:11px;color:var(--warn);margin:34px 0 18px}
-.entry{border-top:1px solid var(--mid);padding:18px 0}
-.entry h3{font-family:var(--ui);font-size:18px;font-weight:700;margin:0}
-.entry .meta{font-family:var(--mono);font-size:11.5px;color:var(--dim);margin:5px 0 12px}
+.textmode h2{font-family:var(--px);font-size:11px;color:var(--warn);margin:32px 0 16px}
+.entry{border-top:1px solid var(--mid);padding:16px 0}
+.entry h3{font-family:var(--ui);font-size:17px;font-weight:700;margin:0}
+.entry .meta{font-family:var(--mono);font-size:11.5px;color:var(--dim);margin:5px 0 11px}
 .entry ul{margin:0;padding-left:17px;line-height:1.7;font-size:15.5px;color:#D6DDEA}
 .textmode .lead{font-family:var(--mono);font-size:13px;color:var(--dim);line-height:1.8;max-width:70ch}
-.contact{font-family:var(--mono);font-size:12px;display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:22px}
+.contact{font-family:var(--mono);font-size:12px;display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:20px}
 .contact a{color:var(--signal);text-decoration:none;border-bottom:1px solid var(--mid);padding-bottom:2px}
 
 @media (max-width:760px){
   .pad{display:flex}
   .keys{display:none}
   .hud-top h1{font-size:12px}
-}
-@media (prefers-reduced-motion:reduce){
-  .startcard p::after{content:" Motion is minimal in this build."}
+  .panel{
+    position:static;transform:none;width:100%;margin-top:12px;
+    border-radius:3px;max-height:none;
+  }
+  .panel h3{font-size:9px}
+  .panel ul{font-size:13px}
 }
 </style>
 </head>
@@ -138,25 +132,24 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated}
 
   <div class="stagewrap" id="stagewrap">
     <div class="stage" id="stage">
-      <canvas id="cv" width="960" height="420"></canvas>
+      <canvas id="cv"></canvas>
       <div class="hud">
         <span id="hudLeft">2016</span>
         <span class="found" id="hudRight">ROLES 0/7</span>
       </div>
-
       <div class="startcard" id="startcard">
         <h2>CAREER RUN</h2>
-        <p>Nine years of enterprise software delivery, laid out as ground to cross. Walk into a marker to open the role. Everything here is also readable as plain text.</p>
+        <p id="startHint">Nine years of enterprise software delivery, laid out as ground to cross. Walk into a marker to open the role.</p>
         <button id="startbtn">PRESS START</button>
       </div>
+    </div>
 
-      <div class="panel" id="panel" role="dialog" aria-live="polite">
-        <button class="close" id="panelclose">X</button>
-        <p class="tag" id="pTag"></p>
-        <h3 id="pTitle"></h3>
-        <p class="meta" id="pMeta"></p>
-        <ul id="pPts"></ul>
-      </div>
+    <div class="panel" id="panel" role="dialog" aria-live="polite">
+      <button class="close" id="panelclose">X</button>
+      <p class="tag" id="pTag"></p>
+      <h3 id="pTitle"></h3>
+      <p class="meta" id="pMeta"></p>
+      <ul id="pPts"></ul>
     </div>
 
     <div class="pad">
@@ -169,9 +162,7 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated}
 
   <div class="textmode" id="textmode">
     <p class="lead">Nine years turning enterprise software into something a customer can run. Salesforce, customer communications management, document automation, integration work. Based in Laufen, Bavaria, within range of Salzburg and Munich.</p>
-    <div class="contact">
-      <a href="https://linkedin.com/in/eralpatmaca">linkedin.com/in/eralpatmaca</a>
-    </div>
+    <div class="contact"><a href="https://linkedin.com/in/eralpatmaca">linkedin.com/in/eralpatmaca</a></div>
     <h2>EXPERIENCE</h2>
     <div id="textExp"></div>
     <h2>SKILLS &amp; LANGUAGES</h2>
@@ -187,197 +178,230 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated}
       </ul>
     </div>
   </div>
-
 </div>
 
 <script>
-/* ---------------- data ---------------- */
 var STAGES = [
-  { x: 260,  year:"2016", tag:"STAGE 1 · 2016–2017", title:"SOFTWARE IMPL. CONSULTANT", meta:"Quovidion Inc. · Plano, Texas",
+  { x:260,  year:"2016", tag:"STAGE 1 · 2016–2017", title:"SOFTWARE IMPL. CONSULTANT", meta:"Quovidion Inc. · Plano, Texas",
     pts:["Maintained Oracle and SQL Server databases, improving data accuracy","Led full test cycles through UAT and go-live","Automated workflows via VBScript"] },
-  { x: 700,  year:"2017", tag:"STAGE 2 · 2017–2018", title:"TECH. IMPL. CONSULTANT", meta:"Brierley & Partners · Plano, Texas",
+  { x:700,  year:"2017", tag:"STAGE 2 · 2017–2018", title:"TECH. IMPL. CONSULTANT", meta:"Brierley & Partners · Plano, Texas",
     pts:["Reduced system errors by 30% through C# debugging and QA validation","Designed and configured REST API integrations with LoyaltyOnDemand","Strengthened client relationships, improving satisfaction scores"] },
-  { x: 1150, year:"2018", tag:"STAGE 3 · 2018–2021", title:"TECHNICAL CONSULTANT", meta:"M-Files Inc. · Dallas, Texas",
+  { x:1150, year:"2018", tag:"STAGE 3 · 2018–2021", title:"TECHNICAL CONSULTANT", meta:"M-Files Inc. · Dallas, Texas",
     pts:["Oversaw Salesforce administration and data integrity","Acted as technical lead in client workshops and go-live support","Worked with Customer Success to align product with business needs"] },
-  { x: 1600, year:"2021", tag:"STAGE 4 · 2021–2022", title:"SENIOR TECHNICAL CONSULTANT", meta:"M-Files Inc. · Dallas, Texas",
+  { x:1600, year:"2021", tag:"STAGE 4 · 2021–2022", title:"SENIOR TECHNICAL CONSULTANT", meta:"M-Files Inc. · Dallas, Texas",
     pts:["Designed deployment plans and led implementation projects","Migrated 1.5 TB of legacy data, reducing access time by 15%","Conducted root-cause analysis to improve business workflows"] },
-  { x: 2050, year:"2022", tag:"STAGE 5 · 2022–2023", title:"SALESFORCE / CERTINIA CONSULTANT", meta:"VFP Consulting · Dallas, Texas",
+  { x:2050, year:"2022", tag:"STAGE 5 · 2022–2023", title:"SALESFORCE / CERTINIA CONSULTANT", meta:"VFP Consulting · Dallas, Texas",
     pts:["Led process reviews and reverse demos for Certinia implementations","Developed ETL scripts in Python and SOQL, built client dashboards","Delivered client training and support to drive adoption and ROI"] },
-  { x: 2500, year:"2024", tag:"STAGE 6 · 2024–NOW", title:"PROFESSIONAL SERVICES CONSULTANT", meta:"Smart Communications",
+  { x:2500, year:"2024", tag:"STAGE 6 · 2024–NOW", title:"PROFESSIONAL SERVICES CONSULTANT", meta:"Smart Communications",
     pts:["Implemented CCM solutions integrating with Salesforce and SharePoint","Built adaptive forms and REST API integrations for enterprise tools","Resolved technical challenges collaboratively, holding timelines and budgets"] },
-  { x: 2950, year:"BONUS", tag:"BONUS STAGE · SIDE BUILD", title:"JOB HUNTER", meta:"Python · Anthropic API · Selenium · sentence-transformers",
+  { x:2950, year:"BONUS", tag:"BONUS STAGE · SIDE BUILD", title:"JOB HUNTER", meta:"Python · Anthropic API · sentence-transformers",
     pts:["Desktop app aggregating postings from seven ATS provider feeds","LLM requirement extraction, embedding-based semantic matching","Default-deny language filter after three versions failed on edge cases","Score capping so keyword-dense postings cannot outrank eligibility"] }
 ];
 
-/* ---------------- text mode ---------------- */
-var te = document.getElementById("textExp");
+/* ---- text mode ---- */
+var te=document.getElementById("textExp");
 STAGES.slice().reverse().forEach(function(s){
-  var d = document.createElement("div"); d.className = "entry";
-  d.innerHTML = "<h3>"+s.title.replace(/\b\w+/g,function(w){return w[0]+w.slice(1).toLowerCase()})+"</h3>"+
+  var d=document.createElement("div"); d.className="entry";
+  d.innerHTML="<h3>"+s.title.replace(/\b\w+/g,function(w){return w[0]+w.slice(1).toLowerCase()})+"</h3>"+
     "<p class='meta'>"+s.meta+" · "+s.tag.split("· ")[1]+"</p><ul>"+
     s.pts.map(function(p){return "<li>"+p+"</li>"}).join("")+"</ul>";
   te.appendChild(d);
 });
-var swap = document.getElementById("swap"), tm = document.getElementById("textmode"), sw = document.getElementById("stagewrap");
-swap.addEventListener("click", function(){
-  var on = tm.classList.toggle("on");
-  sw.classList.toggle("off", on);
-  swap.textContent = on ? "Play instead" : "Read as text";
+var swap=document.getElementById("swap"),tm=document.getElementById("textmode"),sw=document.getElementById("stagewrap");
+swap.addEventListener("click",function(){
+  var on=tm.classList.toggle("on");
+  sw.classList.toggle("off",on);
+  swap.textContent=on?"Play instead":"Read as text";
+  if(on){ running=false; document.body.classList.remove("playing"); }
 });
 
-/* ---------------- game ---------------- */
-var cvs = document.getElementById("cv"), ctx = cvs.getContext("2d");
-var W = 960, H = 420, GROUND = 340, WORLD_END = 3200;
-var p = { x:60, y:GROUND, vx:0, vy:0, onGround:true, face:1, step:0 };
-var cam = 0, keys = {}, running = false, visited = {}, activeStage = -1;
+/* ---- responsive canvas ---- */
+var cvs=document.getElementById("cv"), ctx=cvs.getContext("2d");
+var stage=document.getElementById("stage");
+var VW=960, VH=420, GROUND=340, WORLD_END=3200, SCALE=1, isMobile=false;
 
-var panel = document.getElementById("panel");
+function sizeCanvas(){
+  var cssW = stage.clientWidth;
+  isMobile = window.innerWidth <= 760;
+  // world units visible: fewer on small screens so the avatar stays readable
+  VW = isMobile ? 400 : 960;
+  var ratio = isMobile ? 0.72 : 0.4375;      // taller box in portrait
+  VH = Math.round(VW * ratio);
+  GROUND = Math.round(VH * 0.80);
+  var dpr = Math.min(window.devicePixelRatio||1, 2);
+  var cssH = Math.round(cssW * ratio);
+  cvs.style.height = cssH+"px";
+  cvs.width  = Math.round(cssW*dpr);
+  cvs.height = Math.round(cssH*dpr);
+  SCALE = (cssW*dpr)/VW;
+  ctx.setTransform(SCALE,0,0,SCALE,0,0);
+  ctx.imageSmoothingEnabled=false;
+  if(!running) draw();
+}
+window.addEventListener("resize",sizeCanvas);
+window.addEventListener("orientationchange",function(){ setTimeout(sizeCanvas,250); });
+
+var p={x:60,y:0,vx:0,vy:0,onGround:true,face:1,step:0};
+var cam=0,keys={},running=false,visited={},activeStage=-1;
+
+var panel=document.getElementById("panel");
 function openPanel(i){
-  var s = STAGES[i];
-  document.getElementById("pTag").textContent = s.tag;
-  document.getElementById("pTitle").textContent = s.title;
-  document.getElementById("pMeta").textContent = s.meta;
-  var ul = document.getElementById("pPts"); ul.innerHTML = "";
-  s.pts.forEach(function(t){ var li=document.createElement("li"); li.textContent=t; ul.appendChild(li); });
+  var s=STAGES[i];
+  document.getElementById("pTag").textContent=s.tag;
+  document.getElementById("pTitle").textContent=s.title;
+  document.getElementById("pMeta").textContent=s.meta;
+  var ul=document.getElementById("pPts"); ul.innerHTML="";
+  s.pts.forEach(function(t){var li=document.createElement("li");li.textContent=t;ul.appendChild(li);});
   panel.classList.add("on");
-  if(!visited[i]){ visited[i]=true; document.getElementById("hudRight").textContent = "ROLES "+Object.keys(visited).length+"/7"; }
-  document.getElementById("hudLeft").textContent = s.year;
+  if(!visited[i]){visited[i]=true;document.getElementById("hudRight").textContent="ROLES "+Object.keys(visited).length+"/7";}
+  document.getElementById("hudLeft").textContent=s.year;
 }
-function closePanel(){ panel.classList.remove("on"); activeStage = -1; }
-document.getElementById("panelclose").addEventListener("click", closePanel);
+function closePanel(){panel.classList.remove("on");activeStage=-1;}
+document.getElementById("panelclose").addEventListener("click",closePanel);
 
-addEventListener("keydown", function(e){
-  if(["ArrowLeft","ArrowRight","Space"," "].indexOf(e.key===" "?" ":e.code)>-1 || e.code==="Space"){ e.preventDefault(); }
-  keys[e.code] = true;
-  if(e.code==="Escape") closePanel();
+addEventListener("keydown",function(e){
+  if(e.code==="Space"||e.code==="ArrowLeft"||e.code==="ArrowRight"||e.code==="ArrowUp")e.preventDefault();
+  keys[e.code]=true;
+  if(e.code==="Escape")closePanel();
 });
-addEventListener("keyup", function(e){ keys[e.code] = false; });
+addEventListener("keyup",function(e){keys[e.code]=false;});
 
-function hold(id, code){
-  var el = document.getElementById(id);
-  ["touchstart","mousedown"].forEach(function(ev){ el.addEventListener(ev, function(e){ e.preventDefault(); keys[code]=true; }); });
-  ["touchend","touchcancel","mouseup","mouseleave"].forEach(function(ev){ el.addEventListener(ev, function(){ keys[code]=false; }); });
+/* touch: pointer events cover iOS and Android uniformly */
+function hold(id,code){
+  var el=document.getElementById(id);
+  function on(e){e.preventDefault();keys[code]=true;el.classList.add("hit");}
+  function off(e){e.preventDefault();keys[code]=false;el.classList.remove("hit");}
+  el.addEventListener("pointerdown",on);
+  el.addEventListener("pointerup",off);
+  el.addEventListener("pointercancel",off);
+  el.addEventListener("pointerleave",off);
+  el.addEventListener("contextmenu",function(e){e.preventDefault();});
 }
-hold("bl","ArrowLeft"); hold("br","ArrowRight"); hold("bj","Space");
+hold("bl","ArrowLeft");hold("br","ArrowRight");hold("bj","Space");
 
-document.getElementById("startbtn").addEventListener("click", function(){
-  document.getElementById("startcard").style.display = "none";
-  running = true; loop();
+/* swipe/tap on the canvas itself as a fallback */
+cvs.addEventListener("pointerdown",function(e){
+  if(!running)return;
+  e.preventDefault();
+  var r=cvs.getBoundingClientRect(), rel=(e.clientX-r.left)/r.width;
+  if(rel<0.35)keys.ArrowLeft=true; else if(rel>0.65)keys.ArrowRight=true; else keys.Space=true;
+});
+["pointerup","pointercancel","pointerleave"].forEach(function(ev){
+  cvs.addEventListener(ev,function(){keys.ArrowLeft=keys.ArrowRight=keys.Space=false;});
 });
 
-/* --- drawing helpers --- */
-function px(x,y,w,h,c){ ctx.fillStyle=c; ctx.fillRect(Math.round(x),Math.round(y),w,h); }
+document.getElementById("startbtn").addEventListener("click",function(){
+  document.getElementById("startcard").style.display="none";
+  running=true;
+  if(isMobile)document.body.classList.add("playing");
+  p.y=GROUND;
+  loop();
+});
+
+function px(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h);}
 
 function drawAvatar(x,y,face,step,moving){
-  var s = 4; // pixel scale
-  var bob = moving ? (Math.floor(step/6)%2) : 0;
-  var top = y - 40 + bob;
-  // helmet / hair
-  px(x-10, top,      20, 6, "#2E3A5C");
-  px(x-12, top+4,    24, 4, "#2E3A5C");
-  // face
-  px(x-8,  top+8,    16, 10, "#E0B48C");
-  // eye
-  px(x + (face>0?2:-6), top+11, 3, 3, "#10131F");
-  // torso
-  px(x-9,  top+18,   18, 16, "#5BE0C8");
-  // badge
-  px(x + (face>0?-6:2), top+21, 4, 4, "#E8B84B");
-  // arms
-  px(x-13, top+19,   4, 11, "#E0B48C");
-  px(x+9,  top+19,   4, 11, "#E0B48C");
-  // legs
-  var la = moving ? (bob? 0:3) : 0;
-  px(x-8,  top+34,   6, 8+la, "#2E3A5C");
-  px(x+2,  top+34,   6, 8+(3-la), "#2E3A5C");
-  // boots
-  px(x-9,  top+42+la, 8, 4, "#1B2135");
-  px(x+1,  top+42+(3-la), 8, 4, "#1B2135");
+  var bob=moving?(Math.floor(step/6)%2):0, top=y-40+bob;
+  px(x-10,top,20,6,"#2E3A5C"); px(x-12,top+4,24,4,"#2E3A5C");
+  px(x-8,top+8,16,10,"#E0B48C");
+  px(x+(face>0?2:-6),top+11,3,3,"#10131F");
+  px(x-9,top+18,18,16,"#5BE0C8");
+  px(x+(face>0?-6:2),top+21,4,4,"#E8B84B");
+  px(x-13,top+19,4,11,"#E0B48C"); px(x+9,top+19,4,11,"#E0B48C");
+  var la=moving?(bob?0:3):0;
+  px(x-8,top+34,6,8+la,"#2E3A5C"); px(x+2,top+34,6,8+(3-la),"#2E3A5C");
+  px(x-9,top+42+la,8,4,"#1B2135"); px(x+1,top+42+(3-la),8,4,"#1B2135");
 }
 
-function drawMarker(x, i){
-  var lit = visited[i], t = Date.now()/300;
-  var fl = Math.sin(t + i) * 3;
-  // post
-  px(x-2, GROUND-56, 4, 56, "#2E3A5C");
-  // flag block
-  var col = lit ? "#E8B84B" : "#5BE0C8";
-  px(x+2, GROUND-56+fl, 26, 18, col);
-  px(x+2, GROUND-56+fl, 26, 3, "#EDF1F7");
-  // number
-  ctx.fillStyle = "#10131F";
-  ctx.font = "bold 11px monospace";
-  ctx.fillText(i===6 ? "★" : String(i+1), x+11, GROUND-42+fl);
-  // base
-  px(x-8, GROUND-6, 20, 6, "#2E3A5C");
+function drawMarker(x,i){
+  var fl=Math.sin(Date.now()/300+i)*3, lit=visited[i];
+  px(x-2,GROUND-56,4,56,"#2E3A5C");
+  px(x+2,GROUND-56+fl,26,18,lit?"#E8B84B":"#5BE0C8");
+  px(x+2,GROUND-56+fl,26,3,"#EDF1F7");
+  ctx.fillStyle="#10131F";ctx.font="bold 11px monospace";
+  ctx.fillText(i===6?"★":String(i+1),x+11,GROUND-42+fl);
+  px(x-8,GROUND-6,20,6,"#2E3A5C");
 }
 
-function drawBackdrop(){
-  // sky bands
-  px(0,0,W,H,"#1B2135");
-  px(0,120,W,90,"#1F2740");
-  // distant blocks (parallax)
+function draw(){
+  ctx.clearRect(0,0,VW,VH);
+  px(0,0,VW,VH,"#1B2135");
+  px(0,VH*0.28,VW,VH*0.24,"#1F2740");
   for(var i=0;i<26;i++){
-    var bx = (i*180 - cam*0.25) % (W+300) ;
-    if(bx < -200) bx += W+300;
-    var bh = 40 + ((i*37)%70);
-    px(bx, GROUND-bh-40, 60, bh+40, "#232B45");
-    for(var w=0;w<3;w++){
-      px(bx+8+w*18, GROUND-bh-26, 8, 8, ((i+w)%3===0)?"#3E5C8A":"#1F2740");
-    }
+    var bx=(i*180-cam*0.25)%(VW+300); if(bx<-200)bx+=VW+300;
+    var bh=40+((i*37)%70);
+    px(bx,GROUND-bh-40,60,bh+40,"#232B45");
+    for(var w=0;w<3;w++)px(bx+8+w*18,GROUND-bh-26,8,8,((i+w)%3===0)?"#3E5C8A":"#1F2740");
   }
-  // ground
-  px(0, GROUND, W, H-GROUND, "#2E3A5C");
-  px(0, GROUND, W, 4, "#3E5C8A");
-  for(var g=0; g<40; g++){
-    var gx = (g*48 - cam) % (W+96);
-    if(gx < -96) gx += W+96;
-    px(gx, GROUND+14, 22, 3, "#28324F");
-    px(gx+26, GROUND+30, 16, 3, "#28324F");
+  px(0,GROUND,VW,VH-GROUND,"#2E3A5C");
+  px(0,GROUND,VW,4,"#3E5C8A");
+  for(var g=0;g<40;g++){
+    var gx=(g*48-cam)%(VW+96); if(gx<-96)gx+=VW+96;
+    px(gx,GROUND+14,22,3,"#28324F"); px(gx+26,GROUND+30,16,3,"#28324F");
+  }
+  STAGES.forEach(function(s,i){
+    var sx=s.x-cam; if(sx>-80&&sx<VW+80)drawMarker(sx,i);
+  });
+  drawAvatar(p.x-cam,p.y||GROUND,p.face,p.step,false);
+  var ex=WORLD_END-cam;
+  if(ex<VW+60){
+    px(ex,GROUND-120,6,120,"#EDF1F7"); px(ex+6,GROUND-120,40,26,"#E8B84B");
+    ctx.fillStyle="#10131F";ctx.font="bold 10px monospace";ctx.fillText("NOW",ex+13,GROUND-103);
   }
 }
 
 function loop(){
-  if(!running) return;
-  // physics
-  var moving = false;
-  if(keys.ArrowLeft){ p.vx = -3.4; p.face = -1; moving = true; }
-  else if(keys.ArrowRight){ p.vx = 3.4; p.face = 1; moving = true; }
-  else p.vx *= 0.72;
+  if(!running)return;
+  var moving=false;
+  if(keys.ArrowLeft){p.vx=-3.4;p.face=-1;moving=true;}
+  else if(keys.ArrowRight){p.vx=3.4;p.face=1;moving=true;}
+  else p.vx*=0.72;
+  if((keys.Space||keys.ArrowUp)&&p.onGround){p.vy=-11.5;p.onGround=false;}
+  p.vy+=0.62;
+  p.x=Math.max(20,Math.min(WORLD_END,p.x+p.vx));
+  p.y+=p.vy;
+  if(p.y>=GROUND){p.y=GROUND;p.vy=0;p.onGround=true;}
+  if(moving)p.step++;
 
-  if((keys.Space || keys.ArrowUp) && p.onGround){ p.vy = -11.5; p.onGround = false; }
-  p.vy += 0.62;
-  p.x = Math.max(20, Math.min(WORLD_END, p.x + p.vx));
-  p.y += p.vy;
-  if(p.y >= GROUND){ p.y = GROUND; p.vy = 0; p.onGround = true; }
-  if(moving) p.step++;
+  cam=Math.max(0,Math.min(WORLD_END-VW+120,p.x-VW/2));
 
-  cam = Math.max(0, Math.min(WORLD_END - W + 120, p.x - W/2));
+  var near=-1;
+  STAGES.forEach(function(s,i){if(Math.abs(p.x-s.x)<34)near=i;});
+  if(near>-1&&near!==activeStage){activeStage=near;openPanel(near);}
+  if(near===-1&&activeStage>-1){closePanel();}
 
-  // stage collision
-  var near = -1;
-  STAGES.forEach(function(s,i){ if(Math.abs(p.x - s.x) < 34) near = i; });
-  if(near > -1 && near !== activeStage){ activeStage = near; openPanel(near); }
-  if(near === -1 && activeStage > -1){ closePanel(); }
-
-  // render
-  ctx.clearRect(0,0,W,H);
-  drawBackdrop();
-  STAGES.forEach(function(s,i){
-    var sx = s.x - cam;
-    if(sx > -80 && sx < W+80) drawMarker(sx, i);
-  });
-  drawAvatar(p.x - cam, p.y, p.face, p.step, moving && p.onGround);
-
-  // end banner
-  var ex = WORLD_END - cam;
-  if(ex < W+60){
-    px(ex, GROUND-120, 6, 120, "#EDF1F7");
-    px(ex+6, GROUND-120, 40, 26, "#E8B84B");
-    ctx.fillStyle="#10131F"; ctx.font="bold 10px monospace"; ctx.fillText("NOW", ex+13, GROUND-103);
+  ctx.clearRect(0,0,VW,VH);
+  px(0,0,VW,VH,"#1B2135");
+  px(0,VH*0.28,VW,VH*0.24,"#1F2740");
+  for(var i=0;i<26;i++){
+    var bx=(i*180-cam*0.25)%(VW+300); if(bx<-200)bx+=VW+300;
+    var bh=40+((i*37)%70);
+    px(bx,GROUND-bh-40,60,bh+40,"#232B45");
+    for(var w=0;w<3;w++)px(bx+8+w*18,GROUND-bh-26,8,8,((i+w)%3===0)?"#3E5C8A":"#1F2740");
+  }
+  px(0,GROUND,VW,VH-GROUND,"#2E3A5C");
+  px(0,GROUND,VW,4,"#3E5C8A");
+  for(var g=0;g<40;g++){
+    var gx=(g*48-cam)%(VW+96); if(gx<-96)gx+=VW+96;
+    px(gx,GROUND+14,22,3,"#28324F"); px(gx+26,GROUND+30,16,3,"#28324F");
+  }
+  STAGES.forEach(function(s,i){var sx=s.x-cam;if(sx>-80&&sx<VW+80)drawMarker(sx,i);});
+  drawAvatar(p.x-cam,p.y,p.face,p.step,moving&&p.onGround);
+  var ex=WORLD_END-cam;
+  if(ex<VW+60){
+    px(ex,GROUND-120,6,120,"#EDF1F7"); px(ex+6,GROUND-120,40,26,"#E8B84B");
+    ctx.fillStyle="#10131F";ctx.font="bold 10px monospace";ctx.fillText("NOW",ex+13,GROUND-103);
   }
   requestAnimationFrame(loop);
 }
+
+/* init */
+sizeCanvas();
+p.y=GROUND;
+if(window.innerWidth<=760){
+  document.getElementById("startHint").textContent="Nine years of enterprise software delivery, laid out as ground to cross. Use the buttons below, or tap the left and right of the screen to move and the middle to jump.";
+}
+draw();
 </script>
 </body>
 </html>

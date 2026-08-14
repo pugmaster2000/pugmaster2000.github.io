@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Eralp Atmaca — Enterprise SaaS Consultant</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Eralp Atmaca — Interactive CV">
+<meta property="og:description" content="Nine years of enterprise software delivery. Salesforce, CCM, integration work.">
+<meta property="og:url" content="https://pugmaster2000.github.io/cv.html">
+<meta property="og:image" content="https://pugmaster2000.github.io/og-cv.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#151A2D;
+  --ink-soft:#4A5270;
+  --paper:#E9ECF2;
+  --card:#F7F8FB;
+  --line:#C9CFDD;
+  --signal:#4351E0;
+  --brass:#9A7B2E;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"Source Serif 4",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:17px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--signal)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 34px;border-bottom:1px solid var(--line)}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-soft);margin:0 0 18px;
+}
+.mast h1{
+  font-family:var(--display);font-weight:700;font-size:clamp(42px,7vw,78px);
+  line-height:.95;letter-spacing:-.03em;margin:0;
+}
+.mast .sub{
+  font-family:var(--display);font-weight:400;font-size:clamp(17px,2.2vw,23px);
+  color:var(--ink-soft);margin:16px 0 0;max-width:52ch;letter-spacing:-.01em;
+}
+.contact{
+  font-family:var(--mono);font-size:12.5px;margin-top:26px;
+  display:flex;flex-wrap:wrap;gap:10px 22px;
+}
+.contact a{text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+.contact a:hover{border-color:var(--signal)}
+
+/* ---------- lens ---------- */
+.lens{
+  position:sticky;top:0;z-index:20;background:var(--paper);
+  border-bottom:1px solid var(--line);
+}
+.lens-inner{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:16px 0}
+.lens-label{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);margin-right:4px;
+}
+.lens button{
+  font-family:var(--display);font-size:14px;font-weight:500;
+  background:transparent;border:1px solid var(--line);border-radius:2px;
+  padding:8px 15px;color:var(--ink-soft);cursor:pointer;
+  transition:background .18s,color .18s,border-color .18s;
+}
+.lens button:hover{border-color:var(--ink-soft);color:var(--ink)}
+.lens button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--card)}
+.lens button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.tally{
+  font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-left:auto;
+}
+.tally b{color:var(--signal);font-weight:500}
+
+/* ---------- sections ---------- */
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+.sec-head{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-soft);margin:0 0 34px;display:flex;align-items:baseline;gap:14px;
+}
+.sec-head::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* ---------- roles ---------- */
+.role{display:grid;grid-template-columns:170px 1fr;gap:34px;padding:26px 0;border-top:1px solid var(--line)}
+.role:first-of-type{border-top:none;padding-top:0}
+.when{font-family:var(--mono);font-size:12px;color:var(--ink-soft);line-height:1.7}
+.role h3{font-family:var(--display);font-size:21px;font-weight:700;letter-spacing:-.015em;margin:0}
+.where{font-family:var(--display);font-size:14px;color:var(--ink-soft);margin:5px 0 16px}
+ul.pts{list-style:none;margin:0;padding:0}
+ul.pts li{
+  position:relative;padding:5px 0 5px 20px;
+  transition:opacity .28s,color .28s;
+}
+ul.pts li::before{
+  content:"";position:absolute;left:0;top:15px;width:8px;height:1px;background:var(--ink-soft);
+  transition:background .28s,width .28s;
+}
+li.hit{color:var(--ink)}
+li.hit::before{background:var(--signal);width:13px}
+li.dim{opacity:.34}
+.mark{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--signal);margin-left:9px;opacity:0;transition:opacity .28s;
+  white-space:nowrap;
+}
+li.hit .mark{opacity:1}
+
+/* ---------- build ---------- */
+.build{background:var(--card);border:1px solid var(--line);border-radius:3px;padding:32px}
+.build h3{font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+.build .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);margin:0 0 18px}
+.build p{margin:0 0 18px;max-width:68ch}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);
+  border-radius:2px;padding:5px 10px;color:var(--ink-soft);background:var(--paper);
+}
+
+/* ---------- grid blocks ---------- */
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:34px}
+.block h4{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:400;margin:0 0 12px;
+}
+.block ul{list-style:none;margin:0;padding:0}
+.block li{padding:3px 0}
+.lang{display:flex;justify-content:space-between;gap:14px;padding:7px 0;border-bottom:1px solid var(--line)}
+.lang span:last-child{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+
+footer{padding:44px 0 70px;font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+
+@media (max-width:720px){
+  .role{grid-template-columns:1fr;gap:12px}
+  .tally{margin-left:0;width:100%}
+  section{padding:42px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <p class="eyebrow">Laufen, Bavaria · Salzburg &amp; Munich range · Remote</p>
+    <h1>Eralp<br>Atmaca</h1>
+    <p class="sub">Nine years turning enterprise software into something a customer can actually run. Salesforce, CCM, document automation, integration work.</p>
+    <div class="contact">
+      <a href="https://linkedin.com/in/eralpatmaca">linkedin.com/in/eralpatmaca</a>
+    </div>
+  </div>
+</header>
+
+<div class="lens">
+  <div class="wrap lens-inner">
+    <span class="lens-label">Read this as</span>
+    <button data-lens="all" aria-pressed="true">Full record</button>
+    <button data-lens="presales" aria-pressed="false">Solution engineering</button>
+    <button data-lens="architect" aria-pressed="false">Solution architecture</button>
+    <button data-lens="platform" aria-pressed="false">Platform ownership</button>
+    <p class="tally" id="tally">Everything, in order.</p>
+  </div>
+</div>
+
+<main class="wrap">
+
+<section>
+  <h2 class="sec-head">Experience</h2>
+
+  <article class="role">
+    <div class="when">Jan 2024 —<br>Present</div>
+    <div>
+      <h3>Professional Services Consultant</h3>
+      <p class="where">Smart Communications</p>
+      <ul class="pts">
+        <li data-t="presales,architect">Implemented CCM solutions integrating with Salesforce and SharePoint<span class="mark">integration story</span></li>
+        <li data-t="architect,platform">Built adaptive forms and REST API integrations, delivering scalable enterprise tools<span class="mark">technical build</span></li>
+        <li data-t="presales">Resolved technical challenges collaboratively, holding timelines and budgets<span class="mark">customer-facing</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="role">
+    <div class="when">Apr 2022 —<br>Oct 2023</div>
+    <div>
+      <h3>Salesforce / Certinia Consultant</h3>
+      <p class="where">VFP Consulting</p>
+      <ul class="pts">
+        <li data-t="presales">Led process reviews and reverse demos for Certinia implementations<span class="mark">demo &amp; discovery</span></li>
+        <li data-t="architect,platform">Developed ETL scripts in Python and SOQL, built client-specific dashboards<span class="mark">technical build</span></li>
+        <li data-t="presales,platform">Delivered client training and support to drive adoption and platform ROI<span class="mark">value framing</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="role">
+    <div class="when">Feb 2021 —<br>Apr 2022</div>
+    <div>
+      <h3>Senior Technical Consultant</h3>
+      <p class="where">M-Files Inc.</p>
+      <ul class="pts">
+        <li data-t="architect">Designed deployment plans and led implementation projects<span class="mark">solution design</span></li>
+        <li data-t="architect,platform">Migrated 1.5 TB of legacy data, reducing access time by 15%<span class="mark">migration</span></li>
+        <li data-t="presales,architect">Conducted root-cause analysis to improve business workflows<span class="mark">discovery</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="role">
+    <div class="when">Aug 2018 —<br>Feb 2021</div>
+    <div>
+      <h3>Technical Consultant</h3>
+      <p class="where">M-Files Inc.</p>
+      <ul class="pts">
+        <li data-t="platform">Oversaw Salesforce administration and data integrity<span class="mark">platform ownership</span></li>
+        <li data-t="presales">Acted as technical lead in client workshops and go-live support<span class="mark">customer-facing</span></li>
+        <li data-t="presales,platform">Worked with Customer Success to align product with business needs<span class="mark">cross-functional</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="role">
+    <div class="when">Aug 2017 —<br>Aug 2018</div>
+    <div>
+      <h3>Technical Implementation Consultant</h3>
+      <p class="where">Brierley &amp; Partners</p>
+      <ul class="pts">
+        <li data-t="platform">Reduced system errors by 30% through C# debugging and QA validation<span class="mark">technical depth</span></li>
+        <li data-t="architect">Designed and configured REST API integrations with LoyaltyOnDemand™<span class="mark">integration</span></li>
+        <li data-t="presales">Strengthened client relationships, improving satisfaction scores<span class="mark">relationship</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="role">
+    <div class="when">Mar 2016 —<br>Aug 2017</div>
+    <div>
+      <h3>Software Implementation Consultant</h3>
+      <p class="where">Quovidion Inc.</p>
+      <ul class="pts">
+        <li data-t="platform">Maintained Oracle and SQL Server databases, improving data accuracy</li>
+        <li data-t="architect">Led full test cycles through UAT and go-live<span class="mark">delivery</span></li>
+        <li data-t="platform">Automated workflows via VBScript<span class="mark">automation</span></li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<section>
+  <h2 class="sec-head">Built outside the job</h2>
+  <div class="build">
+    <p class="kicker">Python · Anthropic API · Selenium</p>
+    <h3>Job Hunter</h3>
+    <p>A desktop application that aggregates postings from seven applicant tracking systems, then scores each one against a candidate profile. Requirement extraction runs through an LLM; matching uses sentence-transformer embeddings against the extracted requirements rather than raw keyword overlap.</p>
+    <p>The interesting part is the filtering. Language requirements are the hard gate in this market, so the knockout detector defaults to deny on any mention of a language in a requirement context unless the posting explicitly softens it. Three earlier versions failed on phrasings like "fluent in English and German," which is how the default-deny posture got there. Scores are capped so that postings dense in matching vocabulary cannot outrank eligibility.</p>
+    <div class="stack">
+      <span class="chip">Greenhouse</span><span class="chip">Lever</span><span class="chip">Ashby</span>
+      <span class="chip">Workable</span><span class="chip">SmartRecruiters</span><span class="chip">Recruitee</span>
+      <span class="chip">Personio</span><span class="chip">Tkinter</span><span class="chip">Selenium</span>
+      <span class="chip">sentence-transformers</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec-head">Skills, languages, credentials</h2>
+  <div class="cols">
+    <div class="block">
+      <h4>Technologies</h4>
+      <ul>
+        <li>Salesforce (Admin, App Builder)</li>
+        <li>SmartCOMM, SmartIQ</li>
+        <li>Python, SOQL, SQL, JavaScript</li>
+        <li>REST APIs, JSON, HTML/CSS</li>
+        <li>M-Files, Certinia, SharePoint</li>
+      </ul>
+    </div>
+    <div class="block">
+      <h4>Methods &amp; tools</h4>
+      <ul>
+        <li>Solution architecture</li>
+        <li>Business process automation</li>
+        <li>ETL, Agile, DevOps</li>
+        <li>JIRA, Postman, Excel</li>
+      </ul>
+    </div>
+    <div class="block">
+      <h4>Languages</h4>
+      <div class="lang"><span>Turkish</span><span>Native</span></div>
+      <div class="lang"><span>English</span><span>Fluent</span></div>
+      <div class="lang"><span>German</span><span>A2</span></div>
+      <p style="font-size:15px;color:var(--ink-soft);margin-top:14px">Native Turkish covers Turkey, the Balkans and much of Eastern Europe in an EMEA patch.</p>
+    </div>
+    <div class="block">
+      <h4>Certifications</h4>
+      <ul>
+        <li>Salesforce Platform App Builder — 2023</li>
+        <li>Salesforce Associate — 2023</li>
+        <li>Salesforce Administrator — 2022</li>
+      </ul>
+      <h4 style="margin-top:26px">Education</h4>
+      <ul>
+        <li>M.Sc. Information Technology &amp; Decision Sciences, University of North Texas</li>
+        <li>B.Sc. Business Information Management, Bilkent University</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">Set the lens above to see which parts of the record line up with a given kind of role.</footer>
+</main>
+
+<script>
+(function(){
+  var COPY = {
+    all:      "Everything, in order.",
+    presales: "customer-facing and demo work across <b>%n</b> engagements",
+    architect:"solution design and integration work across <b>%n</b> engagements",
+    platform: "hands-on platform and build work across <b>%n</b> engagements"
+  };
+  var items = Array.prototype.slice.call(document.querySelectorAll("ul.pts li"));
+  var btns  = Array.prototype.slice.call(document.querySelectorAll(".lens button"));
+  var tally = document.getElementById("tally");
+
+  function apply(lens){
+    var n = 0;
+    items.forEach(function(li){
+      var tags = (li.dataset.t || "").split(",");
+      var hit  = lens !== "all" && tags.indexOf(lens) > -1;
+      li.classList.toggle("hit", hit);
+      li.classList.toggle("dim", lens !== "all" && !hit);
+      if (hit) n++;
+    });
+    tally.innerHTML = COPY[lens].replace("%n", n);
+    btns.forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.lens === lens)); });
+  }
+
+  btns.forEach(function(b){
+    b.addEventListener("click", function(){ apply(b.dataset.lens); });
+  });
+})();
+</script>
+</body>
+</html>

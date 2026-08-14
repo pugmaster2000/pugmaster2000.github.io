@@ -260,12 +260,13 @@ footer{padding:44px 0 70px;font-family:var(--mono);font-size:12px;color:var(--in
 </section>
 
 <section>
-  <h2 class="sec-head">Built outside the job</h2>
+  <h2 class="sec-head">Side project</h2>
   <div class="build">
     <p class="kicker">Python · Anthropic API · Selenium</p>
     <h3>Job Hunter</h3>
-    <p>A desktop application that aggregates postings from seven applicant tracking systems, then scores each one against a candidate profile. Requirement extraction runs through an LLM; matching uses sentence-transformer embeddings against the extracted requirements rather than raw keyword overlap.</p>
+    <p>A desktop application that aggregates postings from seven applicant tracking systems, then scores each one against a candidate profile. Requirement extraction runs through an LLM and drives a derived knockout check; fit scoring is cosine similarity between CV and posting embeddings rather than keyword overlap.</p>
     <p>The interesting part is the filtering. Language requirements are the hard gate in this market, so the knockout detector defaults to deny on any mention of a language in a requirement context unless the posting explicitly softens it. Three earlier versions failed on phrasings like "fluent in English and German," which is how the default-deny posture got there. Scores are capped so that postings dense in matching vocabulary cannot outrank eligibility.</p>
+    <p>Those three phrasings are now eval cases. The module ships a labelled set built entirely from postings the earlier keyword scorer got wrong, each asserting both the extracted languages and the expected knockout, so a prompt change that regresses an old failure is caught rather than rediscovered.</p>
     <div class="stack">
       <span class="chip">Greenhouse</span><span class="chip">Lever</span><span class="chip">Ashby</span>
       <span class="chip">Workable</span><span class="chip">SmartRecruiters</span><span class="chip">Recruitee</span>
@@ -321,6 +322,7 @@ footer{padding:44px 0 70px;font-family:var(--mono);font-size:12px;color:var(--in
 </section>
 
 <footer class="wrap">Set the lens above to see which parts of the record line up with a given kind of role.</footer>
+
 </main>
 
 <script>
